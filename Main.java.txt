@@ -1,0 +1,47 @@
+import java.util.HashSet;
+import java.util.HashMap;
+
+public class Main {
+    public static void main(String[] args) {
+        // Create Person objects
+        Person p1 = new Person("Alice", 25);
+        Person p2 = new Person("Alice", 25);
+        Person p3 = new Person("Bob", 30);
+
+        // Test equals() and hashCode()
+        System.out.println("p1.equals(p2): " + p1.equals(p2)); // true
+        System.out.println("p1.equals(p3): " + p1.equals(p3)); // false
+
+        System.out.println("p1.hashCode(): " + p1.hashCode());
+        System.out.println("p2.hashCode(): " + p2.hashCode());
+        System.out.println("p3.hashCode(): " + p3.hashCode());
+
+        // HashSet test
+        HashSet<Person> peopleSet = new HashSet<>();
+        peopleSet.add(p1);
+        peopleSet.add(p2);
+        peopleSet.add(p3);
+
+        System.out.println("\nHashSet contents:");
+        for (Person p : peopleSet) {
+            System.out.println(p);
+        }
+
+        // HashMap test
+        HashMap<Person, String> personMap = new HashMap<>();
+        personMap.put(p1, "Engineer");
+        personMap.put(p3, "Designer");
+
+        // p2 is equal to p1, so it should update the value
+        personMap.put(p2, "Senior Engineer");
+
+        System.out.println("\nHashMap contents:");
+        for (Person key : personMap.keySet()) {
+            System.out.println(key + " -> " + personMap.get(key));
+        }
+
+        // Lookup with a new Person object (same values as p1/p2)
+        Person lookup = new Person("Alice", 25);
+        System.out.println("\nLookup result: " + personMap.get(lookup)); // Should return "Senior Engineer"
+    }
+}
